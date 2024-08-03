@@ -98,10 +98,17 @@ public class UserService {
     
     public Boolean deleteUser(Long id)
     {
+    	if(userRepository.findById(id).isPresent()) {
     	userRepository.deleteById(id);
     	User user = userRepository.findById(id).orElse(null);
     	Boolean res = user!=null? false:true;
     	return res;
+    	}
+    	else {
+    		 throw new CustomGraphqlException(404, "1. No data Found "
+ 					+ "2. Please provide Valid id "
+ 					+ "3. Invalid  "+id.toString()+" value");
+    	}
     }
 
 	

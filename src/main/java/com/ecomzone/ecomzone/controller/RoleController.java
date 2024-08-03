@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -30,4 +31,21 @@ public class RoleController {
 		return roleService.getRole(id);
 	}
 
+	@MutationMapping
+	public Role createRole(@Argument String name) {
+		return roleService.createRole(name);
+	}
+	
+	@MutationMapping
+	public Role updateRole(@Argument Long id,@Argument String name)
+	{
+	  return roleService.updateRole(id, name);
+	}
+	
+	@MutationMapping
+	public Boolean deleteRole(@Argument Long id)
+	{
+	   
+		return roleService.deleteRole(id);
+	}
 }

@@ -1,0 +1,21 @@
+
+
+
+type Query{
+    hello:String
+    
+    getUsers: [User]
+    getUser(id: ID!): User
+    getRoles: [Role]
+    getRole(id: ID!): Role
+}
+
+type Mutation {
+    createUser(username: String!, password: String!, email: String!, roleId: ID!): User
+    updateUser(id: ID!, username: String, password: String, email: String, roleId: ID): User
+    deleteUser(id: ID!): Boolean
+
+    createRole(name: String!): Role
+    updateRole(id: ID!, name: String!): Role
+    deleteRole(id: ID!): Boolean
+}

@@ -29,12 +29,12 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	public Optional<User> getUser(Long id)
+	public User getUser(Long id)
 	{
 		
 		return Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> new CustomGraphqlException(404, "1. No data Found "
 				+ "2. Please provide Valid id "
-				+ "3. Invalid  "+id.toString()+" value")));
+				+ "3. Invalid  "+id.toString()+" value"))).get();
 			
 	}
 	
@@ -61,37 +61,32 @@ public class UserService {
     
     public User updateUser(Long id,String username, String password, String email, Long roleId)
     {
-    	Optional<User>  user = Optional.ofNullable(userRepository.findById(id).orElseThrow(
+    	User  user = Optional.ofNullable(userRepository.findById(id).orElseThrow(
         		() -> new CustomGraphqlException(404, "1.No data Found "
         				+ "2.Please provide Valid id "
-        				+ "3.Invalid  "+id.toString()+" value"))); 
-    	Optional<Role> role = roleId!=null?Optional.ofNullable(roleRepository.findById(roleId).orElseThrow(
+        				+ "3.Invalid  "+id.toString()+" value"))).get(); 
+    	Role role = Optional.ofNullable(roleRepository.findById(roleId!=null?roleId:user.getRole().getId()).orElseThrow(
         		() -> new CustomGraphqlException(404, "1.No data Found "
         				+ "2.Please provide Valid roleId "
-        				+ "3.Invalid  "+roleId.toString()+" value"))):
-        					
-        					Optional.ofNullable(roleRepository.findById(user.get().getRole().getId()).orElseThrow(
-        			        		() -> new CustomGraphqlException(404, "1.No data Found "
-        			        				+ "2.Please provide Valid roleId "
-        			        				+ "3.Invalid  "+roleId.toString()+" value")));
+        				+ "3.Invalid  "+roleId.toString()+" value"))).get();
        
     	
     		
     	if (username != null) {
-    		user.get().setUsername(username);
+    		user.setUsername(username);
            
         }
         
         if (password != null) {
-            user.get().setPassword(password);
+            user.setPassword(password);
         }
         
         if (email != null) {
-            user.get().setEmail(email);
+            user.setEmail(email);
         }
-    	user.get().setRole(role.get());
+    	user.setRole(role);
     	
-    	User userUpdated = userRepository.save(user.get());
+    	User userUpdated = userRepository.save(user);
     	
     	return userUpdated;
     }

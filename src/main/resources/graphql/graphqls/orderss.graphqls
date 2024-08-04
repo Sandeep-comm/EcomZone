@@ -1,0 +1,8 @@
+type Order {
+    id: ID!
+    user: User!
+    orderDetails: [OrderDetail]!
+    address: UserAddress!
+    totalPrice: Float!
+    orderDate: String!  # Use a string representation of date-time
+}

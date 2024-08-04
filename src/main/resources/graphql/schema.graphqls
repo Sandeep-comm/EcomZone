@@ -6,16 +6,84 @@ type Query{
     
     getUsers: [User]
     getUser(id: ID!): User
+    
+    
     getRoles: [Role]
     getRole(id: ID!): Role
+    
+    getCategory(id: ID!): Category
+    getCategories: [Category]
+    
+    getProduct(id: ID!): Product
+    getProducts: [Product]
+    
+    getProductReview(id: ID!): ProductReview
+    getProductReviews: [ProductReview]
+    
+    getUserAddress(id: ID!): UserAddress
+    getUserAddresses: [UserAddress]
+    
+    getCart(id: ID!): Cart
+    getCarts: [Cart]
+    
+    getCartItem(id: ID!): CartItem
+    getCartItems: [CartItem]
+    
+    getOrder(id: ID!): Order
+    getOrders: [Order]
+    
+    getOrderDetail(id: ID!): OrderDetail
+    getOrderDetails: [OrderDetail]
+    
 }
 
 type Mutation {
+
     createUser(username: String!, password: String!, email: String!, roleId: ID!): User
     updateUser(id: ID!, username: String, password: String, email: String, roleId: ID): User
     deleteUser(id: ID!): Boolean
 
+
     createRole(name: String!): Role
     updateRole(id: ID!, name: String!): Role
     deleteRole(id: ID!): Boolean
+    
+   
+   
+     createCategory(name: String!): Category
+    updateCategory(id: ID!, name: String!): Category
+    deleteCategory(id: ID!): Boolean
+   
+  
+    createProduct(name: String!, description: String!, price: Float!, categoryId: ID!): Product
+    updateProduct(id: ID!, name: String, description: String, price: Float, categoryId: ID): Product
+    deleteProduct(id: ID!): Boolean
+    
+    
+    createProductReview(userId: ID!, productId: ID!, rating: Int!, review: String!): ProductReview
+    updateProductReview(id: ID!, userId: ID, productId: ID, rating: Int, review: String): ProductReview
+    deleteProductReview(id: ID!): Boolean
+    
+    
+    createUserAddress(userId: ID!, street: String!, city: String!, state: String!, zip: String!): UserAddress
+    updateUserAddress(id: ID!, userId: ID, street: String, city: String, state: String, zip: String): UserAddress
+    deleteUserAddress(id: ID!): Boolean
+    
+    
+    createCart(userId: ID!): Cart
+    deleteCart(id: ID!): Boolean
+    
+    
+    createCartItem(cartId: ID!, productId: ID!, quantity: Int!): CartItem
+    updateCartItem(id: ID!, cartId: ID, productId: ID, quantity: Int): CartItem
+    deleteCartItem(id: ID!): Boolean
+    
+    
+    createOrder(userId: ID!, addressId: ID!, totalPrice: Float!, orderDate: String!): Order
+    updateOrder(id: ID!,userId: ID,addressId: ID,totalPrice: Float,orderDate: String): Order
+    deleteOrder(id: ID!): Boolean
+    
+    createOrderDetail(orderId: ID!, productId: ID!, quantity: Int!, price: Float!): OrderDetail
+    updateOrderDetail(id: ID!, quantity: Int, price: Float): OrderDetail
+    deleteOrderDetail(id: ID!): Boolean
 }

@@ -1,0 +1,7 @@
+type OrderDetail {
+    id: ID!
+    order: Order!
+    product: Product!
+    quantity: Int!
+    price: Float!
+}

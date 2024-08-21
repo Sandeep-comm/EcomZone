@@ -4,6 +4,8 @@
 type Query{
     hello:String
     
+    validateUser(username: String!, password: String!): AuthResponse
+    
     getUsers: [User]
     getUser(id: ID!): User
     

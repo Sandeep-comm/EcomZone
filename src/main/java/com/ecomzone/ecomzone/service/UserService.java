@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecomzone.ecomzone.authentication.AuthResponse;
 import com.ecomzone.ecomzone.graphqlExceptions.CustomGraphqlException;
 import com.ecomzone.ecomzone.model.Role;
 import com.ecomzone.ecomzone.model.User;
@@ -104,6 +105,19 @@ public class UserService {
  					+ "2. Please provide Valid id "
  					+ "3. Invalid  "+id.toString()+" value");
     	}
+    }
+    
+    public AuthResponse validateUser(String username,String password)
+    {
+    	
+    	User user = userRepository.findByUsername(username);
+    	
+    	if (user != null && user.getPassword().equals(password)) {
+            return new AuthResponse(true, "Login successful");
+        } else {
+            return new AuthResponse(false, "Invalid credentials");
+        }
+    	
     }
 
 	

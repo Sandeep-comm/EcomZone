@@ -9,6 +9,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.ecomzone.ecomzone.authentication.AuthResponse;
 import com.ecomzone.ecomzone.model.User;
 import com.ecomzone.ecomzone.service.UserService;
 
@@ -53,6 +54,12 @@ public class UserController {
 	 public Boolean deleteUser(@Argument Long id)
 	    {
 	    return userService.deleteUser(id);
+	    }
+	 
+	 @QueryMapping
+	 public AuthResponse validateUser(@Argument String username,@Argument String password)
+	    {
+	      return userService.validateUser(username, password);
 	    }
 
 }

@@ -1,4 +1,6 @@
 type AuthResponse {
   valid: Boolean
   message: String
+  user: User 
+
 }

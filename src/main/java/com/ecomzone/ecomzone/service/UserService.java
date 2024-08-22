@@ -113,9 +113,9 @@ public class UserService {
     	User user = userRepository.findByUsername(username);
     	
     	if (user != null && user.getPassword().equals(password)) {
-            return new AuthResponse(true, "Login successful");
+            return new AuthResponse(true, "Login successful",user);
         } else {
-            return new AuthResponse(false, "Invalid credentials");
+            return new AuthResponse(false, "Invalid credentials",null);
         }
     	
     }

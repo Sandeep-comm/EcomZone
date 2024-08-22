@@ -4,4 +4,6 @@ type User {
     password: String!
     email: String!
     role: Role!
+    addresses: [UserAddress]!
+     orders: [Order]!
 }

@@ -40,10 +40,11 @@ public class UserService {
 	}
 	
 	
-    public User  createUser(String username, String password, String email, Long roleId) {
+    public User  createUser(String username, String password, String email, Integer roleId) {
+    	
         
-        
-        Optional<Role> role = Optional.ofNullable(roleRepository.findById(roleId).orElseThrow(
+       
+        Optional<Role> role = Optional.ofNullable(roleRepository.findById((long)roleId).orElseThrow(
         		() -> new CustomGraphqlException(404, "1.No data Found "
         				+ "2.Please provide Valid roleId "
         				+ "3.Invalid  "+roleId.toString()+" value"))); 
@@ -120,6 +121,7 @@ public class UserService {
     	
     }
 
+	
 	
 
 }

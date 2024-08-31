@@ -39,7 +39,7 @@ public class UserController {
 	}
 	@MutationMapping
     public User createUser(@Argument String username, @Argument String password,
-                           @Argument String email, @Argument Long roleId) {
+                           @Argument String email, @Argument Integer roleId) {
         return userService.createUser(username, password, email, roleId);
     }
 	
